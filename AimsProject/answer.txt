@@ -1,0 +1,15 @@
+- Vì tất cả các đối tượng trong cart đều là thể hiện của Media nên để thực hiện so sánh và sắp xếp Media nên kế thừa interface Comparable
+-Phương thức compareTo(Media m) trả về số dương nếu đối tượng gọi tới nó có so sánh lớn hơn đối tượng m,0 nếu 2 đối tượng bang nhau và 
+số âm nêus nhỏ hơn.Vậy để so sánh theo thứ tự mong muốn,cần pải chỉ rõ khi nào đối tượng nhỏ hơn đối tượng truyền vào(pt return số âm),bằng(return 0) và lớn hơn,return số dương.Khi ó,nếu return số âm thì object hiện tại sẽ được đẩy ra trước trong day sắp xếp,ngược lại sẽ đẩy về phía sau.
+-Không thể sử dung 2 luật khác nhau với lớp Media.Bởi interface Comparable mà Media implements chỉ có duy nhất 1 phương thức sử dung  để so sánh là compareTo.
+-Viết lại code như sau:
+public int compareTo(Media m){
+    if(this instanceof DigitalVideoDisc&& m instanceof DigitalVideoDisc){
+          if(this.getTitle().compareTo(m.getTitle())!=0)
+              return this.getTitle().compareTo(m.getTitle());
+         if(this.getLength()-m.getLength()!=0)
+              return -this.getLength()+m.getLength();
+         return this.getCost()-m.getCost();
+    }
+//Phần còn lại thực hiện so sánh như với Media thông thường
+}
